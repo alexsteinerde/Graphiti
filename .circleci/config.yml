@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  linux-tests:
+  linux-release-test:
     docker:
       - image: swift:latest
     steps:
@@ -9,7 +9,7 @@ jobs:
       - run: apt-get -qq update && apt-get -q -y install libpq-dev libssl-dev zlib1g-dev
       - run:
           name: Compile code with optimizations
-          command: swift build
+          command: swift build -c release
 
   linux-release:
     docker:
@@ -25,5 +25,5 @@ workflows:
   version: 2
   tests:
     jobs:
-      - linux-tests
+      - linux-release-test
       - linux-release
