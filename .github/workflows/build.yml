@@ -3,22 +3,25 @@ on: [push, pull_request]
 jobs:
   xenial:
     container: 
-      image: vapor/swift:5.1-xenial
+      image: swift:xenial
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: apt-get -qq update && apt-get -q -y install libpq-dev libssl-dev zlib1g-dev
     - run: swift test --enable-test-discovery --sanitize=thread
   bionic:
     container: 
-      image: vapor/swift:5.1-bionic
+      image: swift:bionic
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: apt-get -qq update && apt-get -q -y install libpq-dev libssl-dev zlib1g-dev
     - run: swift test --enable-test-discovery --sanitize=thread
   bionic-release:
     container: 
-      image: vapor/swift:5.1-bionic
+      image: swift:bionic
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: apt-get -qq update && apt-get -q -y install libpq-dev libssl-dev zlib1g-dev
     - run: swift build -c release
