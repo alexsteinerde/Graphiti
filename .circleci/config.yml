@@ -9,10 +9,10 @@ jobs:
       - run: apt-get -qq update && apt-get -q -y install libpq-dev libssl-dev zlib1g-dev libicu-dev zlib1g
       - run:
           name: Compile code
-          command: swift build -j=1
+          command: swift build -j=1 || swift build -j=1 || swift build
       - run:
           name: Run tests
-          command: swift test -j=1
+          command: swift test -j=1 || swift test -j=1
 
   linux-release:
     docker:
